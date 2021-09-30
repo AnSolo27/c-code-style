@@ -384,27 +384,6 @@ my_ptr_t*   get_ptr(void);
 void set(int32_t a);
 const char * get(void);
 ```
-
-- Function implementation must include return type and optional other keywords in separate line
-```c
-/* OK */
-int32_t
-foo(void) {
-    return 0;
-}
-
-/* OK */
-static const char*
-get_string(void) {
-    return "Hello world!\r\n";
-}
-
-/* Wrong */
-int32_t foo(void) {
-    return 0;
-}
-```
-
 ## Variables
 
 - Make variable name all lowercase with optional underscore `_` character
