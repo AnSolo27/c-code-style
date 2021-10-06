@@ -80,8 +80,7 @@ static int32_t a;       /* OK */
 static int32_t b = 4;   /* OK */
 static int32_t a = 0;   /* Wrong */
 
-void
-my_func(void) {
+void my_func(void) {
     static int32_t* ptr;/* OK */
     static char abc = 0;/* Wrong */
 }
@@ -89,8 +88,7 @@ my_func(void) {
 
 - Declare all local variables of the same type in the same line
 ```c
-void
-my_func(void) {
+void my_func(void) {
     char a;             /* OK */
     char a, b;          /* OK */
     char b;             /* Wrong, variable with char type already exists */
@@ -102,8 +100,7 @@ my_func(void) {
     2. Integer types, wider unsigned type first
     3. Single/Double floating point
 ```c
-int
-my_func(void) {
+int my_func(void) {
     /* 1 */
     my_struct_t my;     /* First custom structures */
     my_struct_ptr_t* p; /* Pointers too */
@@ -147,8 +144,7 @@ for (i = 0; i < 10; ++i) ...
 
 - Avoid variable assignment with function call in declaration, except for single variables
 ```c
-void
-a(void) {
+void a(void) {
     /* Avoid function calls when declaring variable */
     int32_t a, b = sum(1, 2);
 
@@ -208,26 +204,22 @@ for (size_t j = 0; j < 10; ++j) {}  /* OK */
 ```c
 
 /* When d could be modified, data pointed to by d could not be modified */
-void
-my_func(const void* d) {
+void my_func(const void* d) {
 
 }
 
 /* When d and data pointed to by d both could not be modified */
-void
-my_func(const void* const d) {
+void my_func(const void* const d) {
 
 }
 
 /* Not required, it is advised */
-void
-my_func(const size_t len) {
+void my_func(const size_t len) {
 
 }
 
 /* When d should not be modified inside function, only data pointed to by d could be modified */
-void
-my_func(void* const d) {
+void my_func(void* const d) {
 
 }
 ```
@@ -244,14 +236,12 @@ my_func(void* const d) {
  * thus use `void *`
  */
 /* OK example */
-void
-send_data(const void* data, size_t len) { /* OK */
+void send_data(const void* data, size_t len) { /* OK */
     /* Do not cast `void *` or `const void *` */
     const uint8_t* d = data;/* Function handles proper type for internal usage */
 }
 
-void
-send_data(const void* data, int len) {    /* Wrong, not not use int */
+void send_data(const void* data, int len) {    /* Wrong, not not use int */
 }
 ```
 
@@ -261,8 +251,7 @@ send_data(const void* data, int len) {    /* Wrong, not not use int */
 ```c
 /* OK */
 #include <stdlib.h>
-void
-my_func(size_t size) {
+void my_func(size_t size) {
     int32_t* arr;
     arr = malloc(sizeof(*arr) * n); /* OK, Allocate memory */
     arr = malloc(sizeof *arr * n);  /* Wrong, brackets for sizeof operator are missing */
@@ -274,8 +263,7 @@ my_func(size_t size) {
 }
 
 /* Wrong */
-void
-my_func(size_t size) {
+void my_func(size_t size) {
     int32_t arr[size];  /* Wrong, do not use VLA */
 }
 ```
@@ -340,8 +328,7 @@ if (is_ok == 0)     /* Wrong, use ! for negative check */
 
 - Use `12` indents (`12 * 4` spaces) offset when commenting. If statement is larger than `12` indents, make comment `4-spaces` aligned (examples below) to next available indent
 ```c
-void
-my_func(void) {
+void my_func(void) {
     char a, b;
 
     a = call_func_returning_char_a(a);          /* This is comment with 12*4 spaces indent from beginning of line */
@@ -401,8 +388,7 @@ int32_t MYVar;
 
 - Group local variables together by `type`
 ```c
-void
-foo(void) {
+void foo(void) {
     int32_t a, b;   /* OK */
     char a;
     char b;         /* Wrong, char type already exists */
@@ -411,8 +397,7 @@ foo(void) {
 
 - Do not declare variable after first executable statement
 ```c
-void
-foo(void) {
+void foo(void) {
     int32_t a;
     a = bar();
     int32_t b;      /* Wrong, there is already executable statement */
@@ -1001,8 +986,7 @@ typedef enum {
  * \brief           Check some value
  * \return          \ref MY_OK on success, member of \ref my_enum_t otherwise
  */
-my_enum_t
-check_value(void) {
+my_enum_t check_value(void) {
     return MY_OK;
 }
 ```
@@ -1014,8 +998,7 @@ check_value(void) {
  * \param[in]       in: Input data
  * \return          Pointer to output data on success, `NULL` otherwise
  */
-const void *
-get_data(const void* in) {
+const void * get_data(const void* in) {
     return in;
 }
 ```
